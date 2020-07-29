@@ -49,7 +49,8 @@
             <module>itop-config-mgmt</module>
           </modules>
           <default>false</default>
-        </choice>
+        <sub_options>
+				        <options type="array">
         <choice>
           <extension_code>itop-config-mgmt-datacenter</extension_code>
           <title>Data Center Devices</title>
@@ -92,6 +93,9 @@
             <module>itop-virtualization-mgmt</module>
           </modules>
           <default>false</default>
+        </choice>
+	        </options>
+        </sub_options>
         </choice>
       </options>
     </step>
