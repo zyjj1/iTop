@@ -87,22 +87,6 @@
           <ext_key_to_remote>applicationsolution_id</ext_key_to_remote>
           <duplicates/>
         </field>
-        <field id="providercontracts_list" xsi:type="AttributeLinkedSetIndirect">
-          <linked_class>lnkFunctionalCIToProviderContract</linked_class>
-          <ext_key_to_me>functionalci_id</ext_key_to_me>
-          <count_min>0</count_min>
-          <count_max>0</count_max>
-          <ext_key_to_remote>providercontract_id</ext_key_to_remote>
-          <duplicates/>
-        </field>
-        <field id="services_list" xsi:type="AttributeLinkedSetIndirect">
-          <linked_class>lnkFunctionalCIToService</linked_class>
-          <ext_key_to_me>functionalci_id</ext_key_to_me>
-          <count_min>0</count_min>
-          <count_max>0</count_max>
-          <ext_key_to_remote>service_id</ext_key_to_remote>
-          <duplicates/>
-        </field>
         <field id="softwares_list" xsi:type="AttributeLinkedSet">
           <linked_class>SoftwareInstance</linked_class>
           <ext_key_to_me>system_id</ext_key_to_me>
@@ -110,14 +94,6 @@
           <tracking_level>all</tracking_level>
           <count_min>0</count_min>
           <count_max>0</count_max>
-        </field>
-        <field id="tickets_list" xsi:type="AttributeLinkedSetIndirect">
-          <linked_class>lnkFunctionalCIToTicket</linked_class>
-          <ext_key_to_me>functionalci_id</ext_key_to_me>
-          <count_min>0</count_min>
-          <count_max>0</count_max>
-          <ext_key_to_remote>ticket_id</ext_key_to_remote>
-          <duplicates/>
         </field>
       </fields>
       <presentation>
@@ -146,12 +122,6 @@
             </item>
             <item id="applicationsolution_list">
               <rank>90</rank>
-            </item>
-            <item id="providercontracts_list">
-              <rank>100</rank>
-            </item>
-            <item id="services_list">
-              <rank>110</rank>
             </item>
           </items>
         </details>
@@ -1039,12 +1009,6 @@
             <item id="connectablecis_list">
               <rank>50</rank>
             </item>
-            <item id="providercontracts_list">
-              <rank>60</rank>
-            </item>
-            <item id="services_list">
-              <rank>70</rank>
-            </item>
             <item id="col:col1">
               <rank>80</rank>
               <items>
@@ -1350,12 +1314,6 @@
             <item id="logicalvolumes_list">
               <rank>90</rank>
             </item>
-            <item id="providercontracts_list">
-              <rank>100</rank>
-            </item>
-            <item id="services_list">
-              <rank>110</rank>
-            </item>
             <item id="col:col1">
               <rank>120</rank>
               <items>
@@ -1643,12 +1601,6 @@
             </item>
             <item id="businessprocess_list">
               <rank>110</rank>
-            </item>
-            <item id="providercontracts_list">
-              <rank>120</rank>
-            </item>
-            <item id="services_list">
-              <rank>130</rank>
             </item>
           </items>
         </details>
@@ -2067,12 +2019,6 @@
             <item id="middlewareinstance_list">
               <rank>150</rank>
             </item>
-            <item id="providercontracts_list">
-              <rank>160</rank>
-            </item>
-            <item id="services_list">
-              <rank>170</rank>
-            </item>
           </items>
         </details>
         <search>
@@ -2200,12 +2146,6 @@
             </item>
             <item id="dbschema_list">
               <rank>150</rank>
-            </item>
-            <item id="providercontracts_list">
-              <rank>160</rank>
-            </item>
-            <item id="services_list">
-              <rank>170</rank>
             </item>
           </items>
         </details>
@@ -2335,12 +2275,6 @@
             <item id="webapp_list">
               <rank>150</rank>
             </item>
-            <item id="providercontracts_list">
-              <rank>160</rank>
-            </item>
-            <item id="services_list">
-              <rank>170</rank>
-            </item>
           </items>
         </details>
         <search>
@@ -2458,12 +2392,6 @@
             <item id="applicationsolution_list">
               <rank>140</rank>
             </item>
-            <item id="providercontracts_list">
-              <rank>150</rank>
-            </item>
-            <item id="services_list">
-              <rank>160</rank>
-            </item>
           </items>
         </details>
         <search>
@@ -2571,12 +2499,6 @@
             <item id="applicationsolution_list">
               <rank>140</rank>
             </item>
-            <item id="providercontracts_list">
-              <rank>150</rank>
-            </item>
-            <item id="services_list">
-              <rank>160</rank>
-            </item>
           </items>
         </details>
         <search>
@@ -2683,12 +2605,6 @@
             </item>
             <item id="applicationsolution_list">
               <rank>100</rank>
-            </item>
-            <item id="providercontracts_list">
-              <rank>110</rank>
-            </item>
-            <item id="services_list">
-              <rank>120</rank>
             </item>
           </items>
         </details>
@@ -2805,12 +2721,6 @@
             </item>
             <item id="applicationsolution_list">
               <rank>100</rank>
-            </item>
-            <item id="providercontracts_list">
-              <rank>110</rank>
-            </item>
-            <item id="services_list">
-              <rank>120</rank>
             </item>
           </items>
         </details>
@@ -2936,12 +2846,6 @@
             </item>
             <item id="applicationsolution_list">
               <rank>110</rank>
-            </item>
-            <item id="providercontracts_list">
-              <rank>120</rank>
-            </item>
-            <item id="services_list">
-              <rank>130</rank>
             </item>
           </items>
         </details>
