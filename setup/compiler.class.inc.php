@@ -2128,10 +2128,14 @@ EOF
 				$oRootNode = $oXMLDoc->createElement('dashboard'); // make sure that the document is not empty
 				$oRootNode->setAttribute('xmlns:xsi', "http://www.w3.org/2001/XMLSchema-instance");
 				$oXMLDoc->appendChild($oRootNode);
-				foreach($oDashboardDefinition->childNodes as $oNode)
+				foreach ($oDashboardDefinition->childNodes as $oNode)
 				{
 					$oDefNode = $oXMLDoc->importNode($oNode, true); // layout, cells, etc Nodes and below
 					$oRootNode->appendChild($oDefNode);
+				}
+				if (empty($sModuleRelativeDir))
+				{
+					$sModuleRelativeDir = 'core';
 				}
 				$oXMLDoc->save($sTempTargetDir.'/'.$sModuleRelativeDir.'/'.$sFileName);
 			}
