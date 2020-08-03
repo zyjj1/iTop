@@ -22,7 +22,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/building.png</icon>
+				<icon>images/building.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
@@ -183,7 +183,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/location.png</icon>
+				<icon>images/location.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
@@ -346,7 +346,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/team.png</icon>
+				<icon>images/team.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
@@ -514,7 +514,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/person.png</icon>
+				<icon>images/person.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
@@ -835,7 +835,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/team.png</icon>
+				<icon>images/team.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
@@ -1103,7 +1103,7 @@
 					<attributes/>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/document.png</icon>
+				<icon>images/document.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
@@ -1253,7 +1253,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/document.png</icon>
+				<icon>images/document.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
@@ -1376,7 +1376,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/document.png</icon>
+				<icon>images/document.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
@@ -1480,7 +1480,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>itop-structure/images/document.png</icon>
+				<icon>images/document.png</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>
