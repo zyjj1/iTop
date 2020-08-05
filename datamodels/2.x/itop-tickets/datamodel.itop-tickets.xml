@@ -1190,63 +1190,6 @@
 			</forms>
 			<classes>
 				<!-- Note : A class (or one of its ancestors) MUST be declared here to be displayed in the portal -->
-				<class id="User" _delta="define">
-					<!-- Allow <allowed_profile>s to apply the <transition>s below. Flags on <field>s will be merged with those from datamodel -->
-					<!-- See example in UserRequest class -->
-					<!--<lifecycle/>-->
-					<scopes>
-						<!-- Note : Silos apply to those scope queries -->
-						<scope id="all">
-							<oql_view><![CDATA[SELECT User AS U JOIN Person AS P ON U.contactid=P.id WHERE P.id = :current_contact_id]]></oql_view>
-							<!-- No object of this class can be edited -->
-							<!--<oql_edit />-->
-							<!-- Everybody -->
-							<!--<allowed_profiles />-->
-						</scope>
-					</scopes>
-				</class>
-				<class id="Organization" _delta="define">
-					<scopes>
-						<scope id="all">
-							<oql_view><![CDATA[SELECT Organization WHERE id = :current_contact->org_id]]></oql_view>
-						</scope>
-					</scopes>
-				</class>
-				<class id="Location" _delta="define">
-					<scopes>
-						<scope id="all">
-							<oql_view><![CDATA[SELECT Location WHERE org_id = :current_contact->org_id]]></oql_view>
-						</scope>
-					</scopes>
-				</class>
-				<class id="Contact" _delta="define">
-					<scopes>
-						<scope id="all">
-							<oql_view><![CDATA[SELECT Contact WHERE org_id = :current_contact->org_id]]></oql_view>
-						</scope>
-						<scope id="admin">
-							<oql_view><![CDATA[SELECT Contact]]></oql_view>
-							<allowed_profiles>
-								<allowed_profile id="Administrator"/>
-							</allowed_profiles>
-						</scope>
-					</scopes>
-					<lists>
-						<list id="default">
-							<items>
-								<item id="status">
-									<rank>10</rank>
-								</item>
-								<item id="org_id">
-									<rank>20</rank>
-								</item>
-								<item id="function">
-									<rank>50</rank>
-								</item>
-							</items>
-						</list>
-					</lists>
-				</class>
 				<class id="ServiceFamily" _delta="define">
 					<scopes>
 						<scope id="all">
