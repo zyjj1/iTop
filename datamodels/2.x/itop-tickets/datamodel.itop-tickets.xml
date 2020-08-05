@@ -691,6 +691,27 @@
 			</presentation>
 		</class>
 	</classes>
+	<menus>
+		<menu id="WelcomeMenuPage" xsi:type="DashboardMenuNode" _delta="must_exist">
+			<rank>10</rank>
+			<parent>WelcomeMenu</parent>
+			<definition>
+				<layout>DashboardLayoutOneCol</layout>
+				<title/>
+				<cells>
+					<cell id="0">
+					<rank>0</rank>
+					<dashlets>
+						<dashlet id="6" xsi:type="DashletBadge" _delta="define">
+							<rank>5</rank>
+							<class>Contract</class>
+						</dashlet>
+					</dashlets>
+					</cell>
+				</cells>
+			</definition>
+		</menu>
+	</menus>
 	<meta>
 		<classes>
 			<class id="ResponseTicketTTO" _delta="define">

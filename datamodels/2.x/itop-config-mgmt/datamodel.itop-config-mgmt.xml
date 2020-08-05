@@ -6256,6 +6256,37 @@
     </class>
   </classes>
   <menus>
+	  <menu id="WelcomeMenuPage" xsi:type="DashboardMenuNode" _delta="must_exist">
+	    <rank>10</rank>
+	    <parent>WelcomeMenu</parent>
+	    <definition>
+	    <layout>DashboardLayoutOneCol</layout>
+	    <title/>
+	    <cells>
+	      <cell id="0">
+	      <rank>0</rank>
+	      <dashlets>
+	        <dashlet id="2" xsi:type="DashletBadge" _delta="define">
+		        <rank>1</rank>
+		        <class>BusinessProcess</class>
+	        </dashlet>
+	        <dashlet id="3" xsi:type="DashletBadge" _delta="define">
+		        <rank>2</rank>
+		        <class>ApplicationSolution</class>
+	        </dashlet>
+		      <dashlet id="7" xsi:type="DashletBadge" _delta="define">
+			      <rank>6</rank>
+			      <class>Server</class>
+		      </dashlet>
+		      <dashlet id="8" xsi:type="DashletBadge" _delta="define">
+			      <rank>7</rank>
+			      <class>NetworkDevice</class>
+		      </dashlet>
+	      </dashlets>
+	      </cell>
+	    </cells>
+	    </definition>
+	  </menu>
     <menu id="ConfigManagementOverview" xsi:type="DashboardMenuNode" _delta="define">
       <rank>1</rank>
       <parent>ConfigManagement</parent>
