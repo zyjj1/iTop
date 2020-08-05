@@ -15,7 +15,7 @@ SetupWebPage::AddModule(
 		'dependencies' => array(
 		),
 		'mandatory' => false,
-		'visible' => false,
+		'visible' => true,
 		'installer' => 'TicketsInstaller',
 
 		// Components
