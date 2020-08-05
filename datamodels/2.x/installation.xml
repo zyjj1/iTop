@@ -7,7 +7,7 @@
         <![CDATA[<h2>The options below allow you to configure the type of elements that are to be managed inside iTop.</h2>]]></description>
       <banner>/images/modules.png</banner>
       <options type="array">
-	<choice>
+				<choice>
           <extension_code>itop-structure</extension_code>
           <title>iTop Core</title>
           <description>All the base objects that are mandatory for iTop
@@ -29,8 +29,6 @@
             <module>itop-system-information</module>
 	          <module>itop-fence</module>
 	          <module>itop-time-tracking</module>
-	          <module>itop-object-copier</module>
-	          <module>itop-stencil</module>
 	          <module>combodo-calendar-view</module>
 	          <module>itop-admin-delegation-profiles</module>
 	          <module>combodo-fulltext-search</module>
@@ -113,8 +111,6 @@
           </description>
           <modules type="array">
             <module>itop-service-mgmt</module>
-	    <module>itop-portal-base</module>
-	    <module>itop-portal</module>
             <module>itop-tickets</module>
             <module>itop-request-mgmt</module>
             <module>email-reply</module>
@@ -122,11 +118,11 @@
             <module>precanned-replies-pro</module>
             <module>itop-request-template</module>
             <module>combodo-email-synchro</module>
-	    <module>itop-standard-email-synchro</module>
-	    <!-- <module>itop-assign-to-me</module>-->
-	    <module>combodo-autoclose-ticket</module>
-	    <module>itop-sla-computation</module>
-	    <module>combodo-sla-considering-business-hours</module>
+	          <module>itop-standard-email-synchro</module>
+	          <!-- <module>itop-assign-to-me</module>-->
+	          <module>combodo-autoclose-ticket</module>
+	          <module>itop-sla-computation</module>
+	          <module>combodo-sla-considering-business-hours</module>
           </modules>
           <default>false</default>
         </choice>

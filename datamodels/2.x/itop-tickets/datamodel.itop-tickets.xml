@@ -706,7 +706,7 @@
 		</classes>
 	</meta>
 	<module_designs>
-		<module_design id="itop-portal" xsi:type="portal">
+		<module_design id="itop-portal" xsi:type="portal" >
 			<bricks>
 				<brick id="services" xsi:type="Combodo\iTop\Portal\Brick\BrowseBrick" _delta="define">
 					<active>true</active>
@@ -812,16 +812,16 @@
 					</title>
 					<!-- Optional tag to define which display modes can be used in the brick's page and the brick's tile -->
 					<!--<display_modes>-->
-						<!-- Optional tag that must contain at least 1 <mode> tag. -->
-						<!--<availables>-->
-							<!--<mode id="list"/>-->
-							<!--<mode id="pie-chart"/>-->
-							<!--<mode id="bar-chart"/>-->
-						<!--</availables>-->
-						<!-- Optional tag to define which display mode will be used by default when opening the brick -->
-						<!--<default>list</default>-->
-						<!-- Optional tag to define which display mode will be used to render the brick's tile -->
-						<!--<tile>text</tile>-->
+					<!-- Optional tag that must contain at least 1 <mode> tag. -->
+					<!--<availables>-->
+					<!--<mode id="list"/>-->
+					<!--<mode id="pie-chart"/>-->
+					<!--<mode id="bar-chart"/>-->
+					<!--</availables>-->
+					<!-- Optional tag to define which display mode will be used by default when opening the brick -->
+					<!--<default>list</default>-->
+					<!-- Optional tag to define which display mode will be used to render the brick's tile -->
+					<!--<tile>text</tile>-->
 					<!--</display_modes>-->
 					<description>Brick:Portal:OngoingRequests:Title+</description>
 					<decoration_class>
@@ -874,8 +874,8 @@
 					<!-- <default_list_length>20</default_list_length> -->
 					<data_loading>full</data_loading>
 					<export>
-            			<export_default_fields>true</export_default_fields>
-          			</export>
+						<export_default_fields>true</export_default_fields>
+					</export>
 				</brick>
 				<brick id="closed-tickets-for-portal-user" xsi:type="Combodo\iTop\Portal\Brick\ManageBrick" _delta="define">
 					<active>true</active>
@@ -921,8 +921,8 @@
 					</grouping>
 					<data_loading>auto</data_loading>
 					<export>
-            			<export_default_fields>true</export_default_fields>
-          			</export>
+						<export_default_fields>true</export_default_fields>
+					</export>
 				</brick>
 			</bricks>
 			<forms>
@@ -1039,10 +1039,10 @@
 						<!--<always_show_submit>false</always_show_submit>-->
 						<!-- Optional, navigation rules to define where to go when clicking on the submit/cancel buttons of the form -->
 						<navigation_rules>
-              <submit>
-                <default>go-to-open-requests</default>
-              </submit>
-            </navigation_rules>
+							<submit>
+								<default>go-to-open-requests</default>
+							</submit>
+						</navigation_rules>
 					</properties>
 					<fields></fields>
 					<twig>
@@ -1102,10 +1102,10 @@
 					<class>Ticket</class>
 					<properties>
 						<navigation_rules>
-              <submit>
-                <default>go-to-open-requests</default>
-              </submit>
-            </navigation_rules>
+							<submit>
+								<default>go-to-open-requests</default>
+							</submit>
+						</navigation_rules>
 					</properties>
 					<fields />
 					<twig>
@@ -1118,19 +1118,19 @@
 					<modes>
 						<mode id="apply_stimulus">
 							<stimuli>
-        						<stimulus id="ev_reopen"/>
-	      					</stimuli>
-	      				</mode>
+								<stimulus id="ev_reopen"/>
+							</stimuli>
+						</mode>
 					</modes>
 				</form>
 				<form id="ticket-apply-stimulus" _delta="define">
 					<class>Ticket</class>
 					<properties>
 						<navigation_rules>
-              <submit>
-                <default>go-to-open-requests</default>
-              </submit>
-            </navigation_rules>
+							<submit>
+								<default>go-to-open-requests</default>
+							</submit>
+						</navigation_rules>
 					</properties>
 					<fields />
 					<twig />
@@ -1168,6 +1168,64 @@
 				</form>
 			</forms>
 			<classes>
+				<!-- Note : A class (or one of its ancestors) MUST be declared here to be displayed in the portal -->
+				<class id="User" _delta="define">
+					<!-- Allow <allowed_profile>s to apply the <transition>s below. Flags on <field>s will be merged with those from datamodel -->
+					<!-- See example in UserRequest class -->
+					<!--<lifecycle/>-->
+					<scopes>
+						<!-- Note : Silos apply to those scope queries -->
+						<scope id="all">
+							<oql_view><![CDATA[SELECT User AS U JOIN Person AS P ON U.contactid=P.id WHERE P.id = :current_contact_id]]></oql_view>
+							<!-- No object of this class can be edited -->
+							<!--<oql_edit />-->
+							<!-- Everybody -->
+							<!--<allowed_profiles />-->
+						</scope>
+					</scopes>
+				</class>
+				<class id="Organization" _delta="define">
+					<scopes>
+						<scope id="all">
+							<oql_view><![CDATA[SELECT Organization WHERE id = :current_contact->org_id]]></oql_view>
+						</scope>
+					</scopes>
+				</class>
+				<class id="Location" _delta="define">
+					<scopes>
+						<scope id="all">
+							<oql_view><![CDATA[SELECT Location WHERE org_id = :current_contact->org_id]]></oql_view>
+						</scope>
+					</scopes>
+				</class>
+				<class id="Contact" _delta="define">
+					<scopes>
+						<scope id="all">
+							<oql_view><![CDATA[SELECT Contact WHERE org_id = :current_contact->org_id]]></oql_view>
+						</scope>
+						<scope id="admin">
+							<oql_view><![CDATA[SELECT Contact]]></oql_view>
+							<allowed_profiles>
+								<allowed_profile id="Administrator"/>
+							</allowed_profiles>
+						</scope>
+					</scopes>
+					<lists>
+						<list id="default">
+							<items>
+								<item id="status">
+									<rank>10</rank>
+								</item>
+								<item id="org_id">
+									<rank>20</rank>
+								</item>
+								<item id="function">
+									<rank>50</rank>
+								</item>
+							</items>
+						</list>
+					</lists>
+				</class>
 				<class id="ServiceFamily" _delta="define">
 					<scopes>
 						<scope id="all">
@@ -1242,9 +1300,9 @@
 			</action_rules>
 			<navigation_rules>
 				<!-- Close form (either the modal or the whole page) -->
-				<navigation_rule id="close-form" xsi:type="close"  _delta="define"/>
+				<navigation_rule id="close-form" xsi:type="close" _delta="define"/>
 				<!-- Go to the homepage -->
-				<navigation_rule id="go-to-homepage" xsi:type="go-to-homepage"  _delta="define"/>
+				<navigation_rule id="go-to-homepage" xsi:type="go-to-homepage" _delta="define"/>
 				<!-- Open a manage brick (simple method) -->
 				<navigation_rule id="go-to-open-requests" xsi:type="go-to-manage-brick" _delta="define">
 					<!-- Mandatory, ID of the ManageBrick to go to -->
@@ -1258,30 +1316,30 @@
 				</navigation_rule>
 				<!-- Open a browse brick -->
 				<navigation_rule id="go-to-services" xsi:type="go-to-browse-brick" _delta="define">
-				 <!-- Mandatory, ID of the BrowseBrick to go to -->
-				 <id>services</id>
-				 <!-- Optional, must be an ID of the available browse modes of the brick (//brick/browse_modes/availables/mode) -->
-				 <!-- <browse_mode>tree</browse_mode> -->
-				 <!-- Optional, a string to preset as filter in the brick. ":this->XXX" can be used for the current object -->
-				 <!-- <filter>computer</filter> -->
+					<!-- Mandatory, ID of the BrowseBrick to go to -->
+					<id>services</id>
+					<!-- Optional, must be an ID of the available browse modes of the brick (//brick/browse_modes/availables/mode) -->
+					<!-- <browse_mode>tree</browse_mode> -->
+					<!-- Optional, a string to preset as filter in the brick. ":this->XXX" can be used for the current object -->
+					<!-- <filter>computer</filter> -->
 				</navigation_rule>
 				<!-- Open a brick, developer method -->
 				<!-- <navigation_rule id="go-to-open-requests-alternate-way" xsi:type="go-to-brick"> -->
-					<!-- <route> -->
-						<!-- <id>p_manage_brick_display_as</id> -->
-						<!-- <params> -->
-							<!-- <param id="sBrickId">ongoing-tickets-for-portal-user</param> -->
-							<!-- <param id="sDisplayMode">pie-chart</param> -->
-							<!-- <param id="sGroupingTab">resolved</param> -->
-							<!-- </params> -->
-					<!-- </route> -->
+				<!-- <route> -->
+				<!-- <id>p_manage_brick_display_as</id> -->
+				<!-- <params> -->
+				<!-- <param id="sBrickId">ongoing-tickets-for-portal-user</param> -->
+				<!-- <param id="sDisplayMode">pie-chart</param> -->
+				<!-- <param id="sGroupingTab">resolved</param> -->
+				<!-- </params> -->
+				<!-- </route> -->
 				<!-- </navigation_rule> -->
-</navigation_rules>
-</module_design>
-</module_designs>
-<module_parameters>
-<parameters id="itop-portal" _delta="define">
-<lazy_loading_threshold>500</lazy_loading_threshold><!-- Will be placed in the conf/<env>/config-itop.php file under the itop-portal module's settings  -->
+			</navigation_rules>
+		</module_design>
+	</module_designs>
+	<module_parameters>
+		<parameters id="itop-portal" _delta="define">
+			<lazy_loading_threshold>500</lazy_loading_threshold><!-- Will be placed in the conf/<env>/config-itop.php file under the itop-portal module's settings  -->
 		</parameters>
 	</module_parameters>
 </itop_design>

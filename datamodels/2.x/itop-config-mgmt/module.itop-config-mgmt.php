@@ -14,7 +14,7 @@ SetupWebPage::AddModule(
 		//
 		'dependencies' => array(
 		),
-		'mandatory' => true,
+		'mandatory' => false,
 		'visible' => true,
 		'installer' => 'ConfigMgmtInstaller',
 
