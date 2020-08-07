@@ -1671,6 +1671,9 @@
 				<enable_action>UR_ACTION_MODIFY</enable_action>
 				<enable_permission>UR_ALLOWED_YES</enable_permission>
 				<enable_stimulus/>
+				<style>
+					<decoration_classes>fas fa-folder</decoration_classes>
+				</style>
 			</menu>
 			<menu id="CSVImport" xsi:type="WebPageMenuNode" _delta="define">
 				<rank>10</rank>
@@ -1695,6 +1698,9 @@
 			</menu>
 			<menu id="ConfigManagement" xsi:type="MenuGroup" _delta="define">
 				<rank>20</rank>
+				<style>
+					<decoration_classes>fas fa-database</decoration_classes>
+				</style>
 			</menu>
 			<menu id="Contact" xsi:type="DashboardMenuNode" _delta="define">
 				<rank>2</rank>
