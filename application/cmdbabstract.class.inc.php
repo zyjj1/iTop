@@ -1971,6 +1971,11 @@ HTML
 			$sNullValue = $oAttDef->GetNullValue(); // used for the ValidateField() call in js/forms-json-utils.js
 			$sFieldToValidateId = $iId; // can be different than the displayed field (for example in TagSet)
 
+			// List of attributes that depend on the current one
+			// Might be modified depending on the current field
+			$sWizardHelperJsVarName = "oWizardHelper{$sFormPrefix}";
+			$aDependencies = MetaModel::GetDependentAttributes($sClass, $sAttCode);
+
 			switch ($oAttDef->GetEditClass())
 			{
 				case 'Date':
@@ -2261,6 +2266,7 @@ EOF
 					break;
 
 				case 'ExtKey':
+					/** @var \AttributeExternalKey $oAttDef */
 					$aEventsList[] = 'validate';
 					$aEventsList[] = 'change';
 
@@ -2279,6 +2285,19 @@ EOF
 					$sHTMLValue = UIExtKeyWidget::DisplayFromAttCode($oPage, $sAttCode, $sClass, $oAttDef->GetLabel(),
 						$oAllowedValues, $value, $iId, $bMandatory, $sFieldName, $sFormPrefix, $aExtKeyParams);
 					$sHTMLValue .= "<!-- iFlags: $iFlags bMandatory: $bMandatory -->\n";
+
+					$bHasExtKeyUpdatingRemoteClassFields = (
+						array_key_exists('replaceDependenciesByRemoteClassFields', $aArgs)
+						&& ($aArgs['replaceDependenciesByRemoteClassFields'])
+					);
+					if ($bHasExtKeyUpdatingRemoteClassFields)
+					{
+						// On this field update we need to update all the corresponding remote class fields
+						// Used when extkey widget is in a linkedset indirect
+						$sWizardHelperJsVarName = $aArgs['wizHelperRemote'];
+						$aDependencies = $aArgs['remoteCodes'];
+					}
+
 					break;
 
 				case 'RedundancySetting':
@@ -2479,12 +2498,22 @@ EOF
 				$oPage->add_ready_script("$('#$sFieldToValidateId').bind('".implode(' ',
 						$aEventsList)."', function(evt, sFormId) { return ValidateField('$sFieldToValidateId', '$sPattern', $bMandatory, sFormId, $sNullValue, $sOriginalValue) } );\n"); // Bind to a custom event: validate
 			}
-			$aDependencies = MetaModel::GetDependentAttributes($sClass, $sAttCode); // List of attributes that depend on the current one
+
+			// handle dependent fields updates (init for WizardHelper JS object)
 			if (count($aDependencies) > 0)
 			{
+				// Bind to a custom event: validate
 				// Unbind first to avoid duplicate event handlers in case of reload of the whole (or part of the) form
-				$oPage->add_ready_script("$('#$iId').unbind('change.dependencies').bind('change.dependencies', function(evt, sFormId) { return oWizardHelper{$sFormPrefix}.UpdateDependentFields(['".implode("','",
-						$aDependencies)."']) } );\n"); // Bind to a custom event: validate
+				$sDependencies = implode("','", $aDependencies);
+				$oPage->add_ready_script(<<<JS
+$('#$iId')
+	.unbind('change.dependencies')
+	.bind('change.dependencies', function(evt, sFormId) { 
+		return $sWizardHelperJsVarName.UpdateDependentFields(['$sDependencies']); 
+		} 
+	);
+JS
+				);
 			}
 		}
 		$oPage->add_dict_entry('UI:ValueMustBeSet');

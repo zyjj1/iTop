@@ -757,14 +757,15 @@ try
 						$value = $oObj->Get($sAttCode);
 						$displayValue = $oObj->GetEditValue($sAttCode);
 						$oAttDef = MetaModel::GetAttributeDef($sClass, $sAttCode);
-						if (!$oAttDef->IsWritable())
+						if (!$oAttDef->IsWritable() || ($oWizardHelper->GetReturnNotEditableFields()))
 						{
 							// Even non-writable fields (like AttributeExternal) can be refreshed
 							$sHTMLValue = $oObj->GetAsHTML($sAttCode);
 						}
 						else
 						{
-							$sHTMLValue = cmdbAbstractObject::GetFormElementForField($oPage, $sClass, $sAttCode, $oAttDef, $value, $displayValue, $sId, '', $iFlags, array('this' => $oObj, 'formPrefix' => $sFormPrefix), false);
+							$sHTMLValue = cmdbAbstractObject::GetFormElementForField($oPage, $sClass, $sAttCode, $oAttDef, $value,
+								$displayValue, $sId, '', $iFlags, array('this' => $oObj, 'formPrefix' => $sFormPrefix), false);
 							// Make sure that we immediately validate the field when we reload it
 							$oPage->add_ready_script("$('#$sId').trigger('validate');");
 						}
