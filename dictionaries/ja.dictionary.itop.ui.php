@@ -941,7 +941,7 @@ Dict::Add('JA JP', 'Japanese', '日本語', array(
 
 	'Menu:NotificationsMenu' => '通知', // Duplicated into itop-welcome-itil (will be removed from here...)
 	'Menu:NotificationsMenu+' => '通知の設定', // Duplicated into itop-welcome-itil (will be removed from here...)
-	'UI:NotificationsMenu:Title' => '<span class="hilite">通知</span>の設定',
+	'UI:NotificationsMenu:Title' => '通知の設定',
 	'UI:NotificationsMenu:Help' => 'ヘルプ',
 	'UI:NotificationsMenu:HelpContent' => '<p>iTopでは、通知はすべてカスタマイズが可能です。通知は<i>トリガーとアクション</i>という二つのオブジェクトがベースになっています。
 <p><i><b>Triggers</b></i> define when a notification will be executed. There are different triggers as part of iTop core, but others can be brought by extensions:
@@ -1154,7 +1154,8 @@ Dict::Add('JA JP', 'Japanese', '日本語', array(
 	'UI:ColumnsAndSortOrder' => 'カラムと並び順:',
 	'UI:UseDefaultSettings' => '既定のセッティングを使用',
 	'UI:UseSpecificSettings' => '次のセッティングを使用:',
-	'UI:Display_X_ItemsPerPage' => '1ページに %1$s アイテムを表示',
+	'UI:Display_X_ItemsPerPage_prefix' => '1ページに',
+	'UI:Display_X_ItemsPerPage_suffix' => 'アイテムを表示',
 	'UI:UseSavetheSettings' => 'セッティングを保存',
 	'UI:OnlyForThisList' => 'このリストのみ',
 	'UI:ForAllLists' => 'すべてのリストのデフォルト',

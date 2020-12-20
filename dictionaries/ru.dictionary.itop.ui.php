@@ -933,7 +933,7 @@ Dict::Add('RU RU', 'Russian', 'Русский', array(
 
 	'Menu:NotificationsMenu' => 'Уведомления', // Duplicated into itop-welcome-itil (will be removed from here...)
 	'Menu:NotificationsMenu+' => 'Конфигурация уведомлений', // Duplicated into itop-welcome-itil (will be removed from here...)
-	'UI:NotificationsMenu:Title' => 'Конфигурация <span class="hilite">Уведомлений</span>',
+	'UI:NotificationsMenu:Title' => 'Конфигурация Уведомлений',
 	'UI:NotificationsMenu:Help' => 'Помощь',
 	'UI:NotificationsMenu:HelpContent' => '<p>В iTop полностью настраиваемые уведомления, которые основаны на двух наборах объектов: <i>триггерах и действиях</i>.</p>
 <p><i><b>Триггеры</b></i> определяют, когда необходимо выполнить действия. Базовые триггеры доступны как часть ядра iTop, другие триггеры добавляются дополнительными расширениями:
@@ -1145,7 +1145,8 @@ Dict::Add('RU RU', 'Russian', 'Русский', array(
 	'UI:ColumnsAndSortOrder' => 'Колонки и порядок сортировки:',
 	'UI:UseDefaultSettings' => 'Использовать настройки по умолчанию',
 	'UI:UseSpecificSettings' => 'Использовать эти настройки:',
-	'UI:Display_X_ItemsPerPage' => 'Показывать %1$s элементов на странице',
+	'UI:Display_X_ItemsPerPage_prefix' => 'Показывать',
+	'UI:Display_X_ItemsPerPage_suffix' => 'элементов на странице',
 	'UI:UseSavetheSettings' => 'Сохранить настройки',
 	'UI:OnlyForThisList' => 'Только для текущего списка',
 	'UI:ForAllLists' => 'Для всех списков',

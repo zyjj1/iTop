@@ -942,7 +942,7 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 
 	'Menu:NotificationsMenu' => 'Benachrichtigungen', // Duplicated into itop-welcome-itil (will be removed from here...)
 	'Menu:NotificationsMenu+' => 'Einstellungen der Benachrichtigungen', // Duplicated into itop-welcome-itil (will be removed from here...)
-	'UI:NotificationsMenu:Title' => 'Einstellungen der <span class="hilite">Benachrichtigungen</span>',
+	'UI:NotificationsMenu:Title' => 'Einstellungen der Benachrichtigungen',
 	'UI:NotificationsMenu:Help' => 'Hilfe',
 	'UI:NotificationsMenu:HelpContent' => '<p>In iTop sind Benachrichtigungen vollständig anpassbar. Sie basieren auf zwei Gruppen an Objekten: <i>Trigger und Aktionen</i>.</p>
 <p><i><b>Trigger</b></i> definieren, wann eine Benachrichtigung ausgeführt wird. Es gibt verschiedene Auslöser als Teil des iTop-Kerns, aber andere können durch Erweiterungen eingebracht werden:
@@ -1154,7 +1154,8 @@ Wenn Aktionen mit Trigger verknüpft sind, bekommt jede Aktion eine Auftragsnumm
 	'UI:ColumnsAndSortOrder' => 'Spalten und Sortierrheienfolge:',
 	'UI:UseDefaultSettings' => 'Verwende Default-Einstellungen',
 	'UI:UseSpecificSettings' => 'Verwende folgende Einstellungen:',
-	'UI:Display_X_ItemsPerPage' => '%1$s Elemente pro Seite anzeigen',
+	'UI:Display_X_ItemsPerPage_prefix' => '',
+	'UI:Display_X_ItemsPerPage_suffix' => 'Elemente pro Seite anzeigen',
 	'UI:UseSavetheSettings' => 'Einstellungen speichern',
 	'UI:OnlyForThisList' => 'Nur für diese Liste',
 	'UI:ForAllLists' => 'Standard für alle Listen',

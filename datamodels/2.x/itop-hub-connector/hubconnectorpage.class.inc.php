@@ -4,17 +4,18 @@ class HubConnectorPage extends NiceWebPage
 {
     public function __construct($sTitle)
     {
-        parent::__construct($sTitle);
-        
-        $this->add_header("Cache-control: no-cache");
-        
-        $sImagesDir = utils::GetAbsoluteUrlAppRoot().'images';
-        $sModuleImagesDir = utils::GetAbsoluteUrlModulesRoot().'itop-hub-connector/images';
-        
-        $sUserPrefs = appUserPreferences::GetAsJSON();
-        $this->add_linked_script(utils::GetAbsoluteUrlAppRoot().'js/utils.js');
-        $this->add_script(
-<<<EOF
+	    parent::__construct($sTitle);
+
+	    $this->no_cache();
+	    $this->add_xframe_options();
+
+	    $sImagesDir = utils::GetAbsoluteUrlAppRoot().'images';
+	    $sModuleImagesDir = utils::GetAbsoluteUrlModulesRoot().'itop-hub-connector/images';
+
+	    $sUserPrefs = appUserPreferences::GetAsJSON();
+	    $this->add_linked_script(utils::GetAbsoluteUrlAppRoot().'js/utils.js');
+	    $this->add_script(
+		    <<<EOF
 		var oUserPreferences = $sUserPrefs;
 EOF
         );

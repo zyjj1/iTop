@@ -55,7 +55,6 @@ class URP_Profiles extends UserRightsBaseClassGUI
 			"db_table" => "priv_urp_profiles",
 			"db_key_field" => "id",
 			"db_finalclass_field" => "",
-			"display_template" => "",
 		);
 		MetaModel::Init_Params($aParams);
 		//MetaModel::Init_InheritAttributes();
@@ -170,11 +169,9 @@ class URP_Profiles extends UserRightsBaseClassGUI
 	function DisplayBareRelations(WebPage $oPage, $bEditMode = false)
 	{
 		parent::DisplayBareRelations($oPage, $bEditMode);
-		if (!$bEditMode)
-		{
-			$oPage->SetCurrentTab('UI:UserManagement:GrantMatrix');
-			$this->DoShowGrantSumary($oPage);
-		}
+
+		$oPage->SetCurrentTab('UI:UserManagement:GrantMatrix');
+		$this->DoShowGrantSumary($oPage);
 	}
 
 	public static function GetReadOnlyAttributes()
@@ -243,7 +240,6 @@ class URP_UserProfile extends UserRightsBaseClassGUI
 			"db_table" => "priv_urp_userprofile",
 			"db_key_field" => "id",
 			"db_finalclass_field" => "",
-			"display_template" => "",
 		);
 		MetaModel::Init_Params($aParams);
 		//MetaModel::Init_InheritAttributes();
@@ -349,7 +345,6 @@ class URP_UserOrg extends UserRightsBaseClassGUI
 			"db_table" => "priv_urp_userorg",
 			"db_key_field" => "id",
 			"db_finalclass_field" => "",
-			"display_template" => "",
 		);
 		MetaModel::Init_Params($aParams);
 		//MetaModel::Init_InheritAttributes();
@@ -434,7 +429,7 @@ class UserRightsProfile extends UserRightsAddOnAPI
 		// Support drastic data model changes: no organization class (or not writable)!
 		if (MetaModel::IsValidClass('Organization') && !MetaModel::IsAbstract('Organization'))
 		{
-			$oOrg = new Organization();
+			$oOrg = MetaModel::NewObject('Organization');
 			$oOrg->Set('name', 'My Company/Department');
 			$oOrg->Set('code', 'SOMECODE');
 			$iOrgId = $oOrg->DBInsertNoReload();
@@ -442,16 +437,12 @@ class UserRightsProfile extends UserRightsAddOnAPI
 			// Support drastic data model changes: no Person class  (or not writable)!
 			if (MetaModel::IsValidClass('Person') && !MetaModel::IsAbstract('Person'))
 			{
-				$oContact = new Person();
+				$oContact = MetaModel::NewObject('Person');
 				$oContact->Set('name', 'My last name');
 				$oContact->Set('first_name', 'My first name');
 				if (MetaModel::IsValidAttCode('Person', 'org_id'))
 				{
 					$oContact->Set('org_id', $iOrgId);
-				}
-				if (MetaModel::IsValidAttCode('Person', 'phone'))
-				{
-					$oContact->Set('phone', '+00 000 000 000');
 				}
 				$oContact->Set('email', 'my.email@foo.org');
 				$iContactId = $oContact->DBInsertNoReload();
@@ -561,7 +552,7 @@ class UserRightsProfile extends UserRightsAddOnAPI
 
 	/**
 	 * @param $oUser User
-	 * @return array
+	 * @return bool
 	 */
 	public function IsAdministrator($oUser)
 	{
@@ -571,16 +562,22 @@ class UserRightsProfile extends UserRightsAddOnAPI
 
 	/**
 	 * @param $oUser User
-	 * @return array
+	 * @return bool
 	 */
 	public function IsPortalUser($oUser)
 	{
 		// UserRights caches the list for us
 		return UserRights::HasProfile(PORTAL_PROFILE_NAME, $oUser);
 	}
+
 	/**
 	 * @param $oUser User
-	 * @return bool
+	 *
+	 * @return array
+	 * @throws \ArchivedObjectException
+	 * @throws \CoreException
+	 * @throws \CoreUnexpectedValue
+	 * @throws \MySQLException
 	 */
 	public function ListProfiles($oUser)
 	{

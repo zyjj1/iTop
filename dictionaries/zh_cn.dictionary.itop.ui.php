@@ -954,7 +954,7 @@ Dict::Add('ZH CN', 'Chinese', '简体中文', array(
 
 	'Menu:NotificationsMenu' => '通知', // Duplicated into itop-welcome-itil (will be removed from here...)
 	'Menu:NotificationsMenu+' => '通知的配置', // Duplicated into itop-welcome-itil (will be removed from here...)
-	'UI:NotificationsMenu:Title' => '配置 <span class="hilite">通知</span>',
+	'UI:NotificationsMenu:Title' => '配置 通知',
 	'UI:NotificationsMenu:Help' => '帮助',
 	'UI:NotificationsMenu:HelpContent' => '<p>在iTop 中, 通知可以被自定义. 它们是基于两个对象集: <i>触发器和操作</i>.</p>
 <p><i><b>触发器</b></i> 定义了什么时候发送通知. iTop core 自带一些触发器, 另一些触发器可由扩展提供:
@@ -1167,7 +1167,8 @@ Dict::Add('ZH CN', 'Chinese', '简体中文', array(
 	'UI:ColumnsAndSortOrder' => '列和排序顺序:',
 	'UI:UseDefaultSettings' => '使用默认配置',
 	'UI:UseSpecificSettings' => '使用下面的配置:',
-	'UI:Display_X_ItemsPerPage' => '每页显示 %1$s 个项目',
+	'UI:Display_X_ItemsPerPage_prefix' => '每页显示',
+	'UI:Display_X_ItemsPerPage_suffix' => '个项目',
 	'UI:UseSavetheSettings' => '保存设置',
 	'UI:OnlyForThisList' => '仅这个列表',
 	'UI:ForAllLists' => '默认所有列表',

@@ -78,14 +78,14 @@ class LoginWebPage extends NiceWebPage
 	
 	public function __construct($sTitle = null)
 	{
-	    if($sTitle === null)
-        {
-            $sTitle = Dict::S('UI:Login:Title');
-        }
+		if ($sTitle === null) {
+			$sTitle = Dict::S('UI:Login:Title');
+		}
 
 		parent::__construct($sTitle);
 		$this->SetStyleSheet();
-		$this->add_header("Cache-control: no-cache");
+		$this->no_cache();
+		$this->add_xframe_options();
 	}
 	
 	public function SetStyleSheet()
@@ -107,7 +107,7 @@ class LoginWebPage extends NiceWebPage
 	 * @throws \CoreException
 	 * @throws \CoreUnexpectedValue
 	 */
-	public static function SynchroniseProfiles(&$oUser, array $aProfiles, $sOrigin)
+	public static function SynchronizeProfiles(&$oUser, array $aProfiles, $sOrigin)
 	{
 		$oProfilesSet = $oUser->Get(‘profile_list’);
 		//delete old profiles
@@ -928,7 +928,7 @@ class LoginWebPage extends NiceWebPage
 			{
 				$sOrigin .= " ({$_SESSION['login_mode']})";
 			}
-			$aExistingProfiles = self::SynchroniseProfiles($oUser, $aProfiles, $sOrigin);
+			$aExistingProfiles = self::SynchronizeProfiles($oUser, $aProfiles, $sOrigin);
 			if ($oUser->IsModified())
 			{
 				$oUser->DBWrite();

@@ -71,7 +71,7 @@ Dict::Add('SK SK', 'Slovak', 'Slovenčina', array(
 	'Class:Query/Attribute:description' => 'Popis',
 	'Class:Query/Attribute:description+' => '',
 	'Class:QueryOQL/Attribute:fields' => 'Polia',
-	'Class:QueryOQL/Attribute:fields+' => 'Coma separated list of attributes (or alias.attribute) to export~~',
+	'Class:QueryOQL/Attribute:fields+' => 'Comma separated list of attributes (or alias.attribute) to export~~',
 	'Class:QueryOQL' => 'OQL Dopyt',
 	'Class:QueryOQL+' => '',
 	'Class:QueryOQL/Attribute:oql' => 'Výraz',
@@ -941,7 +941,7 @@ Dict::Add('SK SK', 'Slovak', 'Slovenčina', array(
 
 	'Menu:NotificationsMenu' => 'Upozornenia', // Duplicated into itop-welcome-itil (will be removed from here...)
 	'Menu:NotificationsMenu+' => '', // Duplicated into itop-welcome-itil (will be removed from here...)
-	'UI:NotificationsMenu:Title' => 'Konfigurácia <span class="hilite">Upozornení</span>',
+	'UI:NotificationsMenu:Title' => 'Konfigurácia Upozornení',
 	'UI:NotificationsMenu:Help' => 'Pomoc',
 	'UI:NotificationsMenu:HelpContent' => '<p>In iTop upozornenia sú plne upraviteľné. Sú založené na dvoch setoch objektov: <i>spúštače a akcie</i>.</p>
 <p><i><b>Spúštače</b></i> definujte bude spustené nejaké upozornenie. Máme 5 typov spúštačov pre pokrytie 3 rôznych fáz životného cyklu objektu:
@@ -1156,7 +1156,8 @@ Keď sú priradené spúštačom, každej akcii je dané číslo "príkazu", šp
 	'UI:ColumnsAndSortOrder' => 'Stĺpce a triediaci príkaz:',
 	'UI:UseDefaultSettings' => 'Použite štandardné nastavenia',
 	'UI:UseSpecificSettings' => 'Použite nasledovné nastavenia:',
-	'UI:Display_X_ItemsPerPage' => 'Zobraziť %1$s položiek na stránku',
+	'UI:Display_X_ItemsPerPage_prefix' => 'Zobraziť',
+	'UI:Display_X_ItemsPerPage_suffix' => 'položiek na stránku',
 	'UI:UseSavetheSettings' => 'Uložiť nastavenia',
 	'UI:OnlyForThisList' => 'Iba pre tento zoznam',
 	'UI:ForAllLists' => 'Pre všetky zoznamy',

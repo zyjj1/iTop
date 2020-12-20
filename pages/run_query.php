@@ -17,9 +17,16 @@
  * You should have received a copy of the GNU Affero General Public License
  */
 
+use Combodo\iTop\Application\UI\Base\Component\Alert\AlertFactory;
+use Combodo\iTop\Application\UI\Base\Component\Button\ButtonFactory;
+use Combodo\iTop\Application\UI\Base\Component\Field\Field;
+use Combodo\iTop\Application\UI\Base\Component\Field\FieldFactory;
+use Combodo\iTop\Application\UI\Base\Component\Form\Form;
+use Combodo\iTop\Application\UI\Base\Component\Html\Html;
+use Combodo\iTop\Application\UI\Base\Component\Input\TextArea;
+
 require_once('../approot.inc.php');
 require_once(APPROOT.'/application/application.inc.php');
-require_once(APPROOT.'/application/itopwebpage.class.inc.php');
 require_once(APPROOT.'/application/startup.inc.php');
 require_once(APPROOT.'/application/loginwebpage.class.inc.php');
 
@@ -92,7 +99,7 @@ $sOperation = utils::ReadParam('operation', 'menu');
 $oAppContext = new ApplicationContext();
 
 $oP = new iTopWebPage(Dict::S('UI:RunQuery:Title'));
-$oP->SetBreadCrumbEntry('ui-tool-runquery', Dict::S('Menu:RunQueriesMenu'), Dict::S('Menu:RunQueriesMenu+'), '', utils::GetAbsoluteUrlAppRoot().'images/wrench.png');
+$oP->SetBreadCrumbEntry('ui-tool-runquery', Dict::S('Menu:RunQueriesMenu'), Dict::S('Menu:RunQueriesMenu+'), '', 'fas fa-terminal', iTopWebPage::ENUM_BREADCRUMB_ENTRY_ICON_TYPE_CSS_CLASSES);
 
 // Main program
 $sExpression = utils::ReadParam('expression', '', false, 'raw_data');
@@ -102,8 +109,7 @@ ShowExamples($oP, $sExpression);
 
 try
 {
-	if ($sEncoding == 'crypted')
-	{
+	if ($sEncoding == 'crypted') {
 		// Translate $sExpression into a oql expression
 		$sClearText = base64_decode($sExpression);
 		echo "<strong>FYI: '$sClearText'</strong><br/>\n";
@@ -139,12 +145,9 @@ try
 			foreach($oFilter->GetQueryParams() as $sParam => $foo)
 			{
 				$value = utils::ReadParam('arg_'.$sParam, null, true, 'raw_data');
-				if (!is_null($value))
-				{
+				if (!is_null($value)) {
 					$aArgs[$sParam] = $value;
-				}
-				else
-				{
+				} else {
 					$aArgs[$sParam] = '';
 				}
 			}
@@ -153,9 +156,29 @@ try
 		}
 	}
 
-	$oP->add("<form method=\"post\">\n");
-	$oP->add(Dict::S('UI:RunQuery:ExpressionToEvaluate')."<br/>\n");
-	$oP->add("<textarea cols=\"120\" rows=\"8\" id=\"expression\" name=\"expression\">".htmlentities($sExpression, ENT_QUOTES, 'UTF-8')."</textarea>\n");
+	$oQueryForm = new Form();
+	$oP->AddUiBlock($oQueryForm);
+
+	$oHiddenParams = new Html($oAppContext->GetForForm());
+	$oQueryForm->AddSubBlock($oHiddenParams);
+
+	$oQueryTextArea = new TextArea(utils::HtmlEntities($sExpression), 'expression', 120, 8);
+	$oQueryTextArea->SetName('expression');
+	$oQueryField = FieldFactory::MakeFromObject(
+		Dict::S('UI:RunQuery:ExpressionToEvaluate'),
+		$oQueryTextArea,
+		Field::ENUM_FIELD_LAYOUT_LARGE
+	);
+	$oQueryForm->AddSubBlock($oQueryField);
+
+	$oQuerySubmit = ButtonFactory::MakeForPrimaryAction(
+		Dict::S('UI:Button:Evaluate'),
+		null,
+		null,
+		true
+	);
+	$oQueryForm->AddSubBlock($oQuerySubmit);
+
 	$oP->add_linked_script(utils::GetAbsoluteUrlAppRoot()."/js/jquery.hotkeys.js");
 	$oP->add_ready_script(<<<EOF
 $("#expression").select();
@@ -165,25 +188,18 @@ $("#expression").on("keydown", null, "ctrl+return", function() {
 EOF
 	);
 
-	if (count($aArgs) > 0)
-	{
+	if (count($aArgs) > 0) {
 		$oP->add("<div class=\"wizContainer\">\n");
 		$oP->add("<h3>Query arguments</h3>\n");
-		foreach($aArgs as $sParam => $sValue)
-		{
+		foreach ($aArgs as $sParam => $sValue) {
 			$oP->p("$sParam: <input type=\"string\" name=\"arg_$sParam\" value=\"$sValue\">\n");
 		}
-		$oP->add("</div>\n"); 
+		$oP->add("</div>\n");
 	}
 
-	$oP->add("<input type=\"submit\" value=\"".Dict::S('UI:Button:Evaluate')."\" title=\"".Dict::S('UI:Button:Evaluate:Title')."\">\n");
-	$oP->add($oAppContext->GetForForm());
-	$oP->add("</form>\n");
-
-	if ($oFilter)
-	{
+	if ($oFilter) {
 		$oP->add("<h3>Query results</h3>\n");
-		
+
 		$oResultBlock = new DisplayBlock($oFilter, 'list', false);
 		$oResultBlock->Display($oP, 'runquery');
 
@@ -192,23 +208,19 @@ EOF
 		$sPageId = "ui-search-".$oFilter->GetClass();
 		$sLabel = MetaModel::GetName($oFilter->GetClass());
 		$aArgs = array();
-		foreach (array_merge($_POST, $_GET) as $sKey => $value)
-		{
-			if (is_array($value))
-			{
+		foreach (array_merge($_POST, $_GET) as $sKey => $value) {
+			if (is_array($value)) {
 				$aItems = array();
-				foreach($value as $sItemKey => $sItemValue)
-				{
+				foreach ($value as $sItemKey => $sItemValue) {
 					$aArgs[] = $sKey.'['.$sItemKey.']='.urlencode($sItemValue);
 				}
-			}
-			else
-			{
+			} else {
 				$aArgs[] = $sKey.'='.urlencode($value);
 			}
 		}
 		$sUrl = utils::GetAbsoluteUrlAppRoot().'pages/run_query.php?'.implode('&', $aArgs);
-		$oP->SetBreadCrumbEntry($sPageId, $sLabel, $oFilter->ToOQL(true), $sUrl, '../images/breadcrumb-search.png');
+		$oP->SetBreadCrumbEntry($sPageId, $sLabel, $oFilter->ToOQL(true), $sUrl, 'fas fa-terminal',
+			iTopWebPage::ENUM_BREADCRUMB_ENTRY_ICON_TYPE_CSS_CLASSES);
 
 		$oP->p('');
 		$oP->StartCollapsibleSection(Dict::S('UI:RunQuery:MoreInfo'), false, 'runQuery');
@@ -221,19 +233,16 @@ EOF
 		// Avoid adding all the fields for counts or "group by" requests
 		$aCountAttToLoad = array();
 		$sMainClass = null;
-		foreach ($oFilter->GetSelectedClasses() as $sClassAlias => $sClass)
-		{
+		foreach ($oFilter->GetSelectedClasses() as $sClassAlias => $sClass) {
 			$aCountAttToLoad[$sClassAlias] = array();
-			if (empty($sMainClass))
-			{
+			if (empty($sMainClass)) {
 				$sMainClass = $sClass;
 			}
 		}
 
 		$aOrderBy = MetaModel::GetOrderByDefault($sMainClass);
 
-		if (($oFilter instanceof DBObjectSearch) && !MetaModel::GetConfig()->Get('use_legacy_dbsearch'))
-		{
+		if (($oFilter instanceof DBObjectSearch) && !MetaModel::GetConfig()->Get('use_legacy_dbsearch')) {
 			// OQL Developed for Count
 			$oP->p('');
 			$oP->p(Dict::S('UI:RunQuery:DevelopedOQLCount'));
@@ -241,7 +250,7 @@ EOF
 			$oBuild = new QueryBuilderContext($oFilter, $aModifierProperties, null, null, null, $aCountAttToLoad);
 			$oP->p('<pre>'.$oSQLObjectQueryBuilder->DebugOQLClassTree($oBuild).'</pre>');
 		}
-		
+
 		// SQL Count
 		$oP->p('');
 		$oP->p(Dict::S('UI:RunQuery:ResultSQLCount'));
@@ -290,21 +299,21 @@ EOF
 				{
 					$oP->p('<b>'.Dict::Format('UI:RunQuery:Error', $e->getHtmlDesc()).'</b>');
 				}
-			}
-			else
-			{
+			} else {
 				$oP->p('<b>'.Dict::Format('UI:RunQuery:Error', $e->getHtmlDesc()).'</b>');
 			}
-		}
-		else
-		{
+		} else {
 			$oP->p('<b>'.Dict::Format('UI:RunQuery:Error', $e->getMessage()).'</b>');
 		}
 	}
 }
-catch(Exception $e)
-{
-	$oP->p('<b>'.Dict::Format('UI:RunQuery:Error', $e->getMessage()).'</b>');
+catch (Exception $e) {
+	$oErrorAlert = AlertFactory::MakeForFailure(
+		Dict::Format('UI:RunQuery:Error', $e->getMessage()),
+		'<pre>'.$e->getTraceAsString().'</pre>'
+	);
+	$oErrorAlert->SetOpenedByDefault(false);
+	$oP->AddUiBlock($oErrorAlert);
 }
 
 $oP->output();

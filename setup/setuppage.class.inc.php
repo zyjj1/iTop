@@ -17,7 +17,6 @@
  * You should have received a copy of the GNU Affero General Public License
  */
 
-require_once(APPROOT.'/application/nicewebpage.class.inc.php');
 require_once(APPROOT.'setup/modulediscovery.class.inc.php');
 require_once(APPROOT.'setup/runtimeenv.class.inc.php');
 require_once(APPROOT.'core/log.class.inc.php');
@@ -144,33 +143,34 @@ class SetupPage extends NiceWebPage
 
 	public function output()
 	{
-		$sLogo = utils::GetAbsoluteUrlAppRoot().'/images/itop-logo.png';
+		$sLogo = utils::GetAbsoluteUrlAppRoot(true).'/images/itop-logo.png';
 		$this->s_content = "<div id=\"header\"><h1><a href=\"http://www.combodo.com/itop\" target=\"_blank\"><img title=\"iTop by Combodo\" alt=\" \" src=\"{$sLogo}?t=".utils::GetCacheBusterTimestamp()."\"></a>&nbsp;".htmlentities($this->s_title,
 				ENT_QUOTES, self::PAGES_CHARSET)."</h1>\n</div><div id=\"setup\">{$this->s_content}\n</div>\n";
 
 		return parent::output();
 	}
 
+	//@deprecated since 3.0.0 use SetupLog::Error
 	public static function log_error($sText)
 	{
 		SetupLog::Error($sText);
 	}
-
+	//@deprecated since 3.0.0 use SetupLog::Warning
 	public static function log_warning($sText)
 	{
 		SetupLog::Warning($sText);
 	}
-
+	//@deprecated since 3.0.0 use SetupLog::Info
 	public static function log_info($sText)
 	{
 		SetupLog::Info($sText);
 	}
-
+	//@deprecated since 3.0.0 use SetupLog::Ok
 	public static function log_ok($sText)
 	{
 		SetupLog::Ok($sText);
 	}
-
+	//@deprecated since 3.0.0 use SetupLog::Ok
 	public static function log($sText)
 	{
 		SetupLog::Ok($sText);
